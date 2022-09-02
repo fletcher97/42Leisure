@@ -3,7 +3,7 @@ package models
 import "gorm.io/gorm"
 
 const (
-	Player_loaded msgType = iota
+	Player_loaded MsgType = iota
 	Player_created
 )
 
@@ -17,10 +17,11 @@ type GameStats struct {
 	gorm.Model
 	PlayerID uint
 
-	Name   string
-	Wins   uint32
-	Losses uint32
-	Draws  uint32
+	Name    string
+	Wins    uint32
+	Losses  uint32
+	Draws   uint32
+	GiveUps uint32
 }
 
 func (p1 Player) Equals(p2 Player) bool {
