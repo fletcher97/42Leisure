@@ -43,18 +43,20 @@ type Game_ttt struct {
 
 // Com
 
-type msgType int8
+type MsgType int8
 
 const (
-	Ttt_join msgType = iota
+	Ttt_join MsgType = iota
 	Ttt_create
 	Ttt_list
 	Ttt_quit
-
+	Ttt_giveUp
+	Ttt_play
+	Ttt_failed
 	Ttt_badMove
 	Ttt_ok
 )
 
-func (t msgType) Bytes() []byte {
+func (t MsgType) Bytes() []byte {
 	return []byte{byte(t)}
 }
