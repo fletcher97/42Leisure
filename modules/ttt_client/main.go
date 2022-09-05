@@ -113,3 +113,9 @@ func main() {
 		}
 	}
 }
+
+// unused on server
+//func (g *Game) deserialize(cont []byte) {
+//	reader := bytes.NewReader(cont)
+//	json.NewDecoder(reader).Decode(&g)
+//}
