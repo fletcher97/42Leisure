@@ -26,3 +26,9 @@ ignoreme*
 
 # Editor
 .vscode/
+
+# Extras
+.env
+*.ignore
+go.work
+go.work.sum
