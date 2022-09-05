@@ -1,0 +1,31 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  server:
+    build: modules/server
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      CGO_ENABLED: 0
+      PG_HOST: ${PG_HOST}
+      PG_USER: ${PG_USER}
+      PG_PASS: ${PG_PASS}
+      PG_NAME: ${PG_NAME}
+      PG_PORT: ${PG_PORT}
+    volumes:
+      - ./modules/server:/42Leisure-server:Z
+  postgres:
+    image: postgres:13.4-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASS}
+      POSTGRES_DB: ${PG_NAME}
+      POSTGRES_PORT: ${PG_PORT}
+    ports:
+      - ${PG_PORT}:${PG_PORT}
+  adminer:
+    restart: always
+    image: adminer:latest
+    ports:
+      - "8081:8080"
