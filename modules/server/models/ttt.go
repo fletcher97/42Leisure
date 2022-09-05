@@ -1,12 +1,16 @@
 package models
 
 import (
+	"database/sql/driver"
+	"errors"
+	"fmt"
+
 	"gorm.io/gorm"
 )
 
 // Game
 
-type GameOption int
+type GameOption int8
 
 const (
 	GameOptionEmpty GameOption = iota
@@ -16,6 +20,19 @@ const (
 	GameOptionBlocked
 	GameOptionStart
 )
+
+func (opt *GameOption) Scan(value interface{}) error {
+	val, ok := value.(int8)
+	if !ok {
+		return errors.New(fmt.Sprint("Failed to unmarshal GameOption value:", value))
+	}
+	*opt = GameOption(val)
+	return nil
+}
+
+func (opt GameOption) Value() (driver.Value, error) {
+	return int8(opt), nil
+}
 
 const (
 	First  = GameOptionO
