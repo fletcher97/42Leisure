@@ -32,13 +32,13 @@ type Game_ttt struct {
 	P2ID uint
 	P2   Player
 
-	First     GameOption
-	Second    GameOption
-	NextP     GameOption
+	First     GameOption `gorm:"type:smallint"`
+	Second    GameOption `gorm:"type:smallint"`
+	NextP     GameOption `gorm:"type:smallint"`
 	PlayBoard uint8
-	BigBoard  Board    `gorm:"type:smallint[]"`
-	Boards    [9]Board `gorm:"type:smallint[][]"`
-	State     GameOption
+	BigBoard  Board      `gorm:"type:smallint[]"`
+	Boards    [9]Board   `gorm:"type:smallint[][]"`
+	State     GameOption `gorm:"type:smallint"`
 }
 
 // Com
