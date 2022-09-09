@@ -1,0 +1,20 @@
+name: Deploy-Dev
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  deploy:
+    runs-on: dev
+    steps:
+      - name: Stop currently running docker
+        run: if [[ $(docker ps -a | wc -l) > 1 ]]; then docker-compose down; fi
+      - uses: actions/checkout@v2
+        with:
+          ref: dev
+      - name: Get .env
+        run: cp ~/.env .
+      - name: Build new docker
+        run: docker-compose build
+      - name: Start new docker
+        run: docker-compose up -d
